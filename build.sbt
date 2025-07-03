@@ -29,8 +29,10 @@ lazy val core = (project in file("."))
           "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
       libraryDependencies ++= Seq(
         // Scalus
-        "org.scalus" % "scalus_3" % scalusVersion,
-        "org.scalus" % "scalus-bloxbean-cardano-client-lib_3" % scalusVersion,
+        "org.scalus" %% "scalus" % scalusVersion,
+        "org.scalus" %% "scalus-bloxbean-cardano-client-lib" % scalusVersion,
+        "org.scalus" %% "scalus-cardano-ledger" % scalusVersion,
+        "org.scalus" %% "scalus-testkit" % scalusVersion,
         // Cardano Client library
         "com.bloxbean.cardano" % "cardano-client-lib" % "0.7.0-beta3-SNAPSHOT",
         "com.bloxbean.cardano" % "cardano-client-backend-blockfrost" % "0.7.0-beta3-SNAPSHOT",
@@ -56,12 +58,16 @@ lazy val core = (project in file("."))
         // Prometheus Java "client"
         "io.prometheus" % "prometheus-metrics-core" % "1.3.6",
         "io.prometheus" % "prometheus-metrics-instrumentation-jvm" % "1.3.6",
-        "io.prometheus" % "prometheus-metrics-exporter-httpserver" % "1.3.6"
+        "io.prometheus" % "prometheus-metrics-exporter-httpserver" % "1.3.6",
+
       ),
       libraryDependencies ++= Seq(
         "org.scalameta" %% "munit" % "1.1.0" % Test,
         "org.scalameta" %% "munit-scalacheck" % "1.1.0" % Test,
-        "org.scalacheck" %% "scalacheck" % "1.18.1" % Test
+        "org.scalacheck" %% "scalacheck" % "1.18.1" % Test,
+        "org.scalus" %% "scalus-testkit" % scalusVersion % Test,
+        // Borer: used for generating arbitrary values of type Transaction
+        "io.bullet" %% "borer-derivation" % "1.16.1" % Test
       )
     )
 
