@@ -400,7 +400,7 @@ class HeadStateGlobal(
                     finalizing
                   )
                 ) match
-                    case Right(block, utxosActive, _, utxosWithdrawn, mbGenesis) =>
+                    case Right(block, utxosActive, utxosWithdrawn, mbGenesis) =>
                         self.pendingOwnBlock = Some(
                           OwnBlock(block, utxosActive, utxosWithdrawn, mbGenesis)
                         )
@@ -639,7 +639,7 @@ class HeadStateGlobal(
                     true
                   )
                 ) match
-                    case Right(block, utxosActive, _, utxosWithdrawn, mbGenesis) =>
+                    case Right(block, utxosActive, utxosWithdrawn, mbGenesis) =>
                         self.pendingOwnBlock = Some(
                           OwnBlock(block, utxosActive, utxosWithdrawn, mbGenesis)
                         )

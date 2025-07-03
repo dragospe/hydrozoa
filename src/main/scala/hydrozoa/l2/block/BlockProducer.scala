@@ -35,7 +35,6 @@ class BlockProducer:
             Block,
             HydrozoaL2Ledger.LedgerUtxoSetOpaque,
             UtxoSetL2,
-            UtxoSetL2,
             Option[(TxId, L2Genesis)])
     ] =
 
@@ -53,7 +52,7 @@ class BlockProducer:
           timeCreation,
           finalizing
         ) match
-            case Some(some @ (block, _, _, _, _)) =>
+            case Some(some @ (block, _, _, _)) =>
                 log.info(s"A new block was produced: $block")
                 // FIXME: this is needed now so we can see deposits on all nodes for sure
                 sleep(1.second)
@@ -87,7 +86,7 @@ object BlockProducer:
       * @param finalizing
       *   finalization flag
       * @return
-      *   Immutable block, set of utxos added, set of utxos withdrawn and optional genesis event.
+      *   Immutable block, active utxo set, set of utxos withdrawn, and optional genesis event.
       *   Returns None if a block can't be produced at the moment, i.e. no event in the pool, no
       *   deposits to absorb, and multisig regime keep-alive is not yet needed.
       */
@@ -99,7 +98,7 @@ object BlockProducer:
         timeCreation: PosixTime,
         finalizing: Boolean
     ): Option[
-      (Block, HydrozoaL2Ledger.LedgerUtxoSetOpaque, UtxoSetL2, UtxoSetL2, Option[(TxId, L2Genesis)])
+      (Block, HydrozoaL2Ledger.LedgerUtxoSetOpaque, UtxoSetL2, Option[(TxId, L2Genesis)])
     ] =
 
         // 1. Initialize the variables and arguments.
@@ -206,7 +205,6 @@ object BlockProducer:
         Some(
           block,
           stateL2.getUtxosActive,
-          UtxoSet[L2](utxosAdded.toMap),
           UtxoSet[L2](utxosWithdrawn.toMap),
           mbGenesis
         )

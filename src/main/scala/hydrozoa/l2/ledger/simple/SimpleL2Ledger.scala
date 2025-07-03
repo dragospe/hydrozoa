@@ -22,6 +22,8 @@ object SimpleL2Ledger:
 
     // Opaque, can be stored and provided back to the ledger.
     opaque type LedgerUtxoSetOpaque = Map[LedgerUtxoId, LedgerOutput]
+    
+    def isEmpty (ledgerSet : LedgerUtxoSetOpaque) : Boolean = ledgerSet.isEmpty
 
     given CanEqual[LedgerUtxoSetOpaque, LedgerUtxoSetOpaque] = CanEqual.derived
 

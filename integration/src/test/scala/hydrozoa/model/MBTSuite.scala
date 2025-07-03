@@ -293,8 +293,7 @@ object MBTSuite extends Commands:
                   headAddress,
                   seedUtxo,
                   1000_000_000,
-                  headMultisigScript,
-                  beaconTokenName
+                  headMultisigScript
                 )
 
                 val l1Mock = CardanoL1Mock(state.knownTxs, state.utxosActive)
@@ -564,7 +563,7 @@ object MBTSuite extends Commands:
 
             maybeNewBlock match
                 case None => Left("Block can't be produced at the moment") /\ state
-                case Some(block, utxosActive, utxosAdded, utxosWithdrawn, mbGenesis) =>
+                case Some(block, utxosActive, utxosWithdrawn, mbGenesis) =>
 
                     log.info(s"A new block was produced by model: $block")
 
